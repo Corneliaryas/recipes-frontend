@@ -52,6 +52,7 @@ const Content = styled.section`
   grid-template-columns: 1fr;
   padding: 4rem 0;
   box-sizing: border-box;
+  width: 100%;
 
   @media (min-width: 576px) {
     column-gap: 4rem;

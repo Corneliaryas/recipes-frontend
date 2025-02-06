@@ -4,6 +4,7 @@ import { Suggestions } from "../Suggestions/Suggestions";
 import { useState } from "react";
 import { Button } from "../ui/Button";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Loading } from "../ui/Loading";
 
 const StyledContainer = styled.main`
   display: flex;
@@ -47,15 +48,16 @@ const getRecipes = async () => {
 };
 
 export const Overview = () => {
-  const query = useQuery({ queryKey: ["recipes"], queryFn: getRecipes });
-  console.log(query);
+  const { data, error, isPending } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: getRecipes,
+  });
+  console.log(data);
 
   const [search, setSearch] = useState("");
   const handleOnSearch = (event: any) => {
     event.preventDefault();
   };
-
-  const recipes = query.data;
   return (
     <StyledContainer>
       <label htmlFor="Search">
@@ -70,8 +72,9 @@ export const Overview = () => {
         />
         <Button type="submit">Search</Button>
       </SearchContainer>
-
-      <Suggestions recipes={recipes} />
+      {isPending && <Loading />}
+      {data && <Suggestions recipes={data} />}
+      {error && <p>Something went wrong</p>}
     </StyledContainer>
   );
 };
