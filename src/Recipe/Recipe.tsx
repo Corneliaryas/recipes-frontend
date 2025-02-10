@@ -10,16 +10,19 @@ const StyledContainer = styled.main`
   width: 100%;
   flex-direction: column;
   box-sizing: border-box;
+  margin-top: 64px;
 
   @media (min-width: 576px) {
     max-width: 80rem;
     margin: 0 auto;
+    margin-top: 64px;
   }
   @media (min-width: 768px) {
     padding: 4rem;
     max-width: 80rem;
     margin: 0 auto;
     align-items: center;
+    margin-top: 64px;
   }
 `;
 
