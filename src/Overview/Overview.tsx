@@ -9,7 +9,6 @@ import { Loading } from "../ui/Loading";
 const StyledContainer = styled.main`
   display: flex;
   width: 100%;
-  min-height: 100vh;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -23,7 +22,7 @@ const StyledContainer = styled.main`
     margin: 0 auto;
   }
   @media (min-width: 768px) {
-    padding: 8rem;
+    padding: 4rem 8rem;
     max-width: 80rem;
     margin: 0 auto;
   }

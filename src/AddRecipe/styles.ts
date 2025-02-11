@@ -26,7 +26,7 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin: 2rem 0;
+  margin: 0;
   width: 100%;
 
   @media (min-width: 768px) {

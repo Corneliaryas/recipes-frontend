@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Nav = styled.nav`
   height: fit-content;
@@ -29,6 +29,19 @@ const StyledNavLink = styled(NavLink)`
     color: var(--main-text-color);
   }
 `;
+const StyledLink = styled(Link)`
+  color: var(--main-text-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  font-weight: 900;
+
+  :hover,
+  :focus {
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+  }
+`;
 
 const StyledList = styled.ul`
   list-style: none;
@@ -40,13 +53,16 @@ const StyledList = styled.ul`
 export const Navbar = () => {
   return (
     <Nav>
-      <StyledNavLink to="/">Recipes</StyledNavLink>
+      <StyledLink to="/">Happy Recipes</StyledLink>
       <StyledList>
+        <li>
+          <StyledNavLink to="/">Overview</StyledNavLink>
+        </li>
         <li>
           <StyledNavLink to="/add-recipe">Add recipe</StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/">Overview</StyledNavLink>
+          <StyledNavLink to="/about">About</StyledNavLink>
         </li>
       </StyledList>
     </Nav>
