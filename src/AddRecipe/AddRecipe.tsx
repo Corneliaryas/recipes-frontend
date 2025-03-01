@@ -13,7 +13,6 @@ import {
 } from "./styles";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { Button } from "../ui/Button";
 import { Link } from "react-router";
 interface Recipe {
   title: string;
@@ -84,23 +83,19 @@ export const AddRecipe = () => {
     values[index].value = e?.target.value;
     setInstructionsFields(values);
   };
-  const addIngredientField = (e: any) => {
-    e.preventDefault();
+  const addIngredientField = () => {
     setIngredientsFields([...ingredientsFields, { value: "" }]);
   };
-  const addInstructionField = (e: any) => {
-    e.preventDefault();
+  const addInstructionField = () => {
     setInstructionsFields([...instructionsFields, { value: "" }]);
   };
 
-  const removeIngredientField = (e: any, index: number) => {
-    e.preventDefault();
+  const removeIngredientField = (index: number) => {
     const updatedFields = [...ingredientsFields];
     updatedFields.splice(index, 1);
     setIngredientsFields(updatedFields);
   };
-  const removeInstructionsField = (e: any, index: number) => {
-    e.preventDefault();
+  const removeInstructionsField = (index: number) => {
     const updatedFields = [...instructionsFields];
     updatedFields.splice(index, 1);
     setInstructionsFields(updatedFields);
@@ -154,8 +149,8 @@ export const AddRecipe = () => {
                   </Label>
                   <StyledRemoveButton
                     type="button"
-                    onClick={(e) => {
-                      removeIngredientField(e, index);
+                    onClick={() => {
+                      removeIngredientField(index);
                     }}
                   >
                     Remove
@@ -163,10 +158,7 @@ export const AddRecipe = () => {
                 </FieldsetField>
               );
             })}
-            <StyledAddButton
-              type="button"
-              onClick={(e) => addIngredientField(e)}
-            >
+            <StyledAddButton type="button" onClick={addIngredientField}>
               Add more ingredients
             </StyledAddButton>
           </Fieldset>
@@ -188,8 +180,8 @@ export const AddRecipe = () => {
                   </Label>
                   <StyledRemoveButton
                     type="button"
-                    onClick={(e) => {
-                      removeInstructionsField(e, index);
+                    onClick={() => {
+                      removeInstructionsField(index);
                     }}
                   >
                     Remove
@@ -197,15 +189,14 @@ export const AddRecipe = () => {
                 </FieldsetField>
               );
             })}
-            <StyledAddButton
-              type="button"
-              onClick={(e) => addInstructionField(e)}
-            >
+            <StyledAddButton type="button" onClick={addInstructionField}>
               Add more steps
             </StyledAddButton>
           </Fieldset>
 
-          <StyledSubmitButton type="submit">Send recipe</StyledSubmitButton>
+          <StyledSubmitButton type="submit" variant="primary">
+            Send recipe
+          </StyledSubmitButton>
         </Form>
       )}
     </StyledContainer>

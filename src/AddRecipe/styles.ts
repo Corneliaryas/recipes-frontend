@@ -6,7 +6,7 @@ export const StyledContainer = styled.main`
   width: 100%;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 2rem;
 
   @media (min-width: 576px) {
     padding: 4rem;
@@ -82,10 +82,12 @@ export const Fieldset = styled.fieldset`
 
 export const StyledAddButton = styled(Button)`
   background-color: var(--tertiary-color);
+  border-color: transparent;
 `;
 export const StyledRemoveButton = styled(Button)`
   background-color: var(--secondary-color);
   color: white;
+  border-color: transparent;
 `;
 
 export const StyledSubmitButton = styled(Button)`

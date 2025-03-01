@@ -12,7 +12,6 @@ const StyledContainer = styled.section`
   box-sizing: border-box;
   row-gap: 1rem;
   column-gap: 1rem;
-  margin-top: 1.5rem;
 
   @media (min-width: 576px) {
     grid-template-columns: repeat(3, 1fr);
@@ -22,17 +21,31 @@ const StyledContainer = styled.section`
   }
 `;
 
-const RecipeCard = styled(Link)`
+const Placeholder = styled.div`
+  flex: 1;
+  padding: 2rem 2rem;
+  box-sizing: border-box;
+  border-radius: 4rem;
+  background-color: white;
+  margin: 0.5rem;
+`;
+
+const StyledTitle = styled.h2`
+  font-weight: 400;
+`;
+
+const RecipeCard = styled(Link)<{ bgColor?: string }>`
   width: 100%;
-  height: 176px;
   border-radius: 50px;
   border: 1px solid transparent;
-  background-color: var(--primary-color);
+  background-color: ${(props) => props.bgColor};
   padding: 1rem;
   box-sizing: border-box;
   color: black;
   font-size: 1rem;
   position: relative;
+  display: flex;
+  flex-direction: column;
 
   ::after {
     content: "";
@@ -43,19 +56,27 @@ const RecipeCard = styled(Link)`
     border: 1px solid black;
     border-radius: 50px;
     position: absolute;
-    top: -0.5rem;
-    left: -0.5rem;
+    top: -0.25rem;
+    left: -0.25rem;
   }
 `;
 
 export const Suggestions = ({ recipes }: { recipes: any }) => {
+  const colors = ["b8de90", "fc5c74", "ffd455"];
   if (recipes && recipes.length > 0) {
     return (
       <StyledContainer>
         {recipes.map((recipe: any) => {
+          let bgColor = "#";
+          bgColor += colors[Math.floor(Math.random() * colors.length)];
           return (
-            <RecipeCard key={recipe._id} to={`recipes/${recipe._id}`}>
-              {recipe.title}
+            <RecipeCard
+              bgColor={bgColor}
+              key={recipe._id}
+              to={`recipes/${recipe._id}`}
+            >
+              <Placeholder />
+              <StyledTitle> {recipe.title}</StyledTitle>
             </RecipeCard>
           );
         })}

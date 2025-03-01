@@ -10,60 +10,49 @@ const StyledContainer = styled.main`
   width: 100%;
   flex-direction: column;
   box-sizing: border-box;
-  margin-top: 64px;
-
-  @media (min-width: 576px) {
-    max-width: 80rem;
-    margin: 0 auto;
-    margin-top: 64px;
-  }
-  @media (min-width: 768px) {
-    padding: 4rem;
-    max-width: 80rem;
-    margin: 0 auto;
-    align-items: center;
-    margin-top: 64px;
-  }
+  margin-top: 5rem;
 `;
 
 const Header = styled.section`
-  margin: 0 -1.5rem;
-  margin-top: -1rem;
-  height: 20rem;
+  width: 100%;
   display: flex;
-  align-items: flex-end;
-  background: linear-gradient(#b8de90, #ffd455);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.5rem;
+  padding: 4rem 2rem;
   box-sizing: border-box;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  background: linear-gradient(#b8de90, #ffd455);
 
   @media (min-width: 576px) {
-    padding: 1.5rem 5.5rem;
+    padding: 8rem 4rem;
+    margin: 0 auto;
   }
-
   @media (min-width: 768px) {
-    height: 20rem;
-    width: 100%;
-    padding: 4rem;
-    max-width: 80rem;
-    border-radius: 1rem;
+    padding: 10rem 8rem;
+    margin: 0 auto;
   }
 `;
 
 const Content = styled.section`
   display: grid;
   grid-template-columns: 1fr;
-  padding: 4rem 0;
+  padding: 4rem 2rem;
   box-sizing: border-box;
   width: 100%;
 
   @media (min-width: 576px) {
     column-gap: 4rem;
     padding: 4rem;
+    max-width: 80rem;
+    margin: 0 auto;
   }
   @media (min-width: 768px) {
     grid-template-columns: 1fr 2fr;
     column-gap: 4rem;
+    padding: 4rem 8rem;
+    max-width: 80rem;
+    margin: 0 auto;
   }
 `;
 
@@ -76,6 +65,7 @@ const IngredientsContainer = styled.ul`
 const InstructionsContainer = styled.ol`
   display: flex;
   flex-direction: column;
+  row-gap: 1rem;
   padding: 0;
   margin-top: 0;
 `;
@@ -95,7 +85,7 @@ const Ingredient = styled.li`
 
 const Instruction = styled.li`
   display: flex;
-  column-gap: 0.5rem;
+  column-gap: 1rem;
 `;
 const BlobContainer = styled.div`
   position: relative;
@@ -111,6 +101,11 @@ const Number = styled.div`
   margin: auto;
   text-align: center;
   font-weight: 700;
+`;
+
+const StyledSpan = styled.span`
+  margin: 0 0.5rem;
+  text-transform: capitalize;
 `;
 
 const getRecipe = async (id: string) => {
@@ -138,11 +133,18 @@ export const Recipe = () => {
   return (
     <StyledContainer>
       <Header>
-        <h2>{recipe.title}</h2>
+        <h1>{recipe.title}</h1>
+        <p>
+          <StyledSpan>{recipe.time} min </StyledSpan>
+          <StyledSpan>{recipe.difficulty} </StyledSpan>
+          {recipe.preferences.map((preference: string) => {
+            return <StyledSpan>{preference} </StyledSpan>;
+          })}
+        </p>
       </Header>
       <Content>
         <IngredientsContainer>
-          <h3>Ingredients</h3>
+          <h2>Ingredients</h2>
 
           {recipe.ingredients.map((ingredient: string, index: number) => {
             return (
@@ -155,14 +157,18 @@ export const Recipe = () => {
         </IngredientsContainer>
 
         <InstructionsContainer>
-          <h3>Instructions</h3>
-          <Instruction>
-            <BlobContainer>
-              <SvgBlob />
-              <Number>1</Number>
-            </BlobContainer>
-            {recipe.instructions}
-          </Instruction>
+          <h2>Instructions</h2>
+          {recipe.instructions.map((instruction: string, index: number) => {
+            return (
+              <Instruction>
+                <BlobContainer>
+                  <SvgBlob />
+                  <Number>{index + 1}</Number>
+                </BlobContainer>
+                {instruction}
+              </Instruction>
+            );
+          })}
         </InstructionsContainer>
       </Content>
     </StyledContainer>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, NavLink } from "react-router";
 
 const Nav = styled.nav`
-  height: fit-content;
+  height: 5rem;
   position: fixed;
   left: 0;
   right: 0;
@@ -13,7 +13,7 @@ const Nav = styled.nav`
   align-items: center;
   padding: 1rem;
   box-sizing: border-box;
-  background-color: var(--primary-color);
+  background-color: var(--main-bg-color);
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -36,6 +36,7 @@ const StyledLink = styled(Link)`
   border-radius: 0.5rem;
   box-sizing: border-box;
   font-weight: 900;
+  font-size: 1.5rem;
 
   :hover,
   :focus {
@@ -49,7 +50,7 @@ const StyledList = styled.ul`
   padding: 0;
   display: none;
   margin: 0;
-  column-gap: 0.5rem;
+  column-gap: 1rem;
   @media (min-width: 576px) {
     display: flex;
   }
@@ -86,7 +87,7 @@ const MobileMenu = styled.nav<{ isMenuOpen: boolean }>`
   width: 75%;
   padding: 1rem;
   box-sizing: border-box;
-  background-color: var(--primary-color);
+  background-color: var(--main-bg-color);
   min-height: 100vh;
   z-index: 1;
   border-start-start-radius: 1rem;

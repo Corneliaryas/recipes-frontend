@@ -6,7 +6,7 @@ export const SearchBar = styled.input`
   border: 1px solid black;
   border-radius: 56px;
   padding: 10px 20px;
-  width: inherit;
+  flex: 1;
   height: 3rem;
   box-sizing: border-box;
 `;
