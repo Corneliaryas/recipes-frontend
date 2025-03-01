@@ -40,22 +40,29 @@ const SearchContainer = styled.form`
   }
 `;
 
-const getRecipes = async () => {
-  const url = "https://recipes-backend-cl9w.onrender.com/recipes";
+const getRecipes = async (key?: string) => {
+  //move to config or env
+  const url = key
+    ? `https://recipes-backend-cl9w.onrender.com/recipes?search=${key}`
+    : "https://recipes-backend-cl9w.onrender.com/recipes";
+  const url_local = key
+    ? `http://localhost:8080/recipes?search=${key}`
+    : "http://localhost:8080/recipes";
   const res = await fetch(url);
   return res.json();
 };
 
 export const Overview = () => {
-  const { data, error, isPending } = useQuery({
-    queryKey: ["recipes"],
-    queryFn: getRecipes,
-  });
-  console.log(data);
-
   const [search, setSearch] = useState("");
+
+  const { data, error, isPending, refetch } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: () => getRecipes(search),
+  });
+
   const handleOnSearch = (event: any) => {
     event.preventDefault();
+    refetch();
   };
   return (
     <StyledContainer>

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
 import { Link, NavLink } from "react-router";
 
 const Nav = styled.nav`
@@ -46,25 +47,93 @@ const StyledLink = styled(Link)`
 const StyledList = styled.ul`
   list-style: none;
   padding: 0;
-  display: flex;
+  display: none;
   margin: 0;
   column-gap: 0.5rem;
+  @media (min-width: 576px) {
+    display: flex;
+  }
 `;
+const StyledMobileList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  row-gap: 1rem;
+  @media (min-width: 576px) {
+  }
+`;
+
+const Hamburger = styled.button`
+  display: block;
+  border: none;
+  background-color: transparent;
+  color: var(--main-text-color);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  @media (min-width: 576px) {
+    display: none;
+  }
+`;
+
+const MobileMenu = styled.nav<{ isMenuOpen: boolean }>`
+  display: ${(props) => (props.isMenuOpen ? "flex" : "none")};
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  width: 75%;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: var(--primary-color);
+  min-height: 100vh;
+  z-index: 1;
+  border-start-start-radius: 1rem;
+  transform: translateX(${(props) => (props.isMenuOpen ? "0px" : "500px")});
+  transition: transform 0.5s ease-in-out;
+  @media (min-width: 576px) {
+    display: none;
+  }
+`;
+
 export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+  console.log(isMenuOpen);
   return (
-    <Nav>
-      <StyledLink to="/">Happy Recipes</StyledLink>
-      <StyledList>
-        <li>
-          <StyledNavLink to="/">Overview</StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/add-recipe">Add recipe</StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/about">About</StyledNavLink>
-        </li>
-      </StyledList>
-    </Nav>
+    <>
+      <MobileMenu isMenuOpen={isMenuOpen}>
+        <StyledMobileList>
+          <li>
+            <StyledNavLink to="/">Overview</StyledNavLink>
+          </li>
+          <li>
+            <StyledNavLink to="/add-recipe">Add recipe</StyledNavLink>
+          </li>
+          <li>
+            <StyledNavLink to="/about">About</StyledNavLink>
+          </li>
+        </StyledMobileList>
+      </MobileMenu>
+
+      <Nav>
+        <StyledLink to="/">Happy Recipes</StyledLink>
+        <Hamburger onClick={handleMenuClick}>Menu</Hamburger>
+        <StyledList>
+          <li>
+            <StyledNavLink to="/">Overview</StyledNavLink>
+          </li>
+          <li>
+            <StyledNavLink to="/add-recipe">Add recipe</StyledNavLink>
+          </li>
+          <li>
+            <StyledNavLink to="/about">About</StyledNavLink>
+          </li>
+        </StyledList>
+      </Nav>
+    </>
   );
 };

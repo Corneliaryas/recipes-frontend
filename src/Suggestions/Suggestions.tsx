@@ -42,7 +42,6 @@ const RecipeCard = styled(Link)`
     background-color: transparent;
     border: 1px solid black;
     border-radius: 50px;
-    z-index: 1;
     position: absolute;
     top: -0.5rem;
     left: -0.5rem;
